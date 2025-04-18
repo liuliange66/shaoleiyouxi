@@ -85,9 +85,49 @@
          /* --- Footer Controls --- */
          .footer-controls { display: flex; justify-content: space-between; align-items: center; padding: 0 5px; margin-top: auto; gap: 8px; }
          .footer-actions-left { display: flex; gap: 8px; }
-         .footer-btn { width: 45px; height: 45px; background-color: white; border: 2px solid var(--button-border); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.1); font-size: 20px; color: var(--button-text); transition: background-color 0.2s ease, transform 0.1s ease; } .footer-btn:active { transform: scale(0.95); }
-         .mode-switch-btn[data-mode="reveal"]::before { content: '⛏️'; font-size: 24px; } .mode-switch-btn[data-mode="flag"]::before { content: '🚩'; font-size: 24px; }
-         .hint-btn::before { content: '💡'; } .refresh-btn::before { content: '🔄'; font-size: 24px; }
+         .footer-btn {
+          background: transparent !important;
+          border: none !important;
+          outline: none !important;
+          box-shadow: none !important;
+          width: 64px;
+          height: 64px;
+          padding: 0 !important;
+          margin: 0 !important;
+          position: relative;
+          overflow: visible !important;
+        }
+        .footer-btn img {
+          display: block;
+          width: 100%;
+          height: 100%;
+        }
+        .footer-btn .btn-img {
+          width: 100%;
+          height: 100%;
+          display: block;
+          filter: drop-shadow(0 4px 16px #3a4edc44) drop-shadow(0 1.5px 4px #fff3);
+          pointer-events: none;
+          transition: filter 0.2s, transform 0.15s;
+        }
+        .footer-btn:hover .btn-img {
+          filter: drop-shadow(0 0 16px 4px #6a7cff88) drop-shadow(0 4px 16px #3a4edc44) drop-shadow(0 1.5px 4px #fff3);
+          transform: scale(1.07);
+        }
+        .footer-btn:active .btn-img {
+          filter: drop-shadow(0 1px 2px #222);
+          transform: scale(0.93);
+        }
+        @media (max-width: 700px) {
+          .footer-btn {
+            width: 48px;
+            height: 48px;
+          }
+        }
+         .mode-switch-btn[data-mode="reveal"] { background-image: url('assets/挖雷.png'); }
+         .mode-switch-btn[data-mode="flag"]   { background-image: url('assets/插旗.png'); }
+         .hint-btn      { background-image: url('assets/提示.png'); }
+         .refresh-btn   { background-image: url('assets/刷新.png'); }
          .action-button { width: 55px; height: 55px; background-color: var(--button-primary-bg); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; box-shadow: 0 3px 6px rgba(0,0,0,0.2); position: relative; border: none; } .action-button::before, .action-button::after { content: ''; position: absolute; width: 18px; height: 5px; background-color: #333; border-radius: 3px; } .action-button::before { transform: rotate(45deg) translate(-5px, 5px); } .action-button::after { transform: rotate(-45deg) translate(5px, 5px); }
          /* --- Modals (Settings & Help) --- */
          .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--modal-overlay-bg); display: flex; justify-content: center; align-items: center; z-index: 100; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0s linear 0.3s; } .modal-overlay.visible { opacity: 1; visibility: visible; transition: opacity 0.3s ease, visibility 0s linear 0s; }
@@ -337,6 +377,112 @@
           .board-container { overflow-x: auto !important; touch-action: pan-x pan-y; }
           .board { min-width: unset !important; }
         }
+
+        /* 顶部设置按钮美化（仅阴影和背景图，不设置形状） */
+        #settings-btn.icon-btn {
+          background-color: transparent !important;
+          border: none !important;
+          outline: none !important;
+          box-shadow: 0 4px 16px #3a4edc44, 0 1.5px 4px #fff3;
+          background-image: url('assets/设置.png');
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: center;
+          transition: box-shadow 0.2s, transform 0.15s, background 0.2s;
+          width: 64px;
+          height: 64px;
+        }
+        @media (max-width: 700px) {
+          #settings-btn.icon-btn {
+            width: 48px;
+            height: 48px;
+          }
+        }
+        #settings-btn.icon-btn:hover .btn-img {
+          filter: drop-shadow(0 0 16px 4px #6a7cff88) drop-shadow(0 4px 16px #3a4edc44) drop-shadow(0 1.5px 4px #fff3);
+          transform: scale(1.07);
+        }
+        #settings-btn.icon-btn:active .btn-img {
+          filter: drop-shadow(0 1px 2px #222);
+          transform: scale(0.93);
+        }
+
+        /* 底部按钮美化（仅阴影和背景图，不设置形状） */
+        .footer-btn {
+          box-shadow: 0 4px 16px #3a4edc44, 0 1.5px 4px #fff3;
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: center;
+          transition: box-shadow 0.2s, transform 0.15s, background 0.2s;
+        }
+        .footer-btn:active {
+          box-shadow: 0 1px 2px #222;
+          transform: scale(0.93);
+        }
+        .footer-btn:hover {
+          box-shadow: 0 0 16px 4px #6a7cff88, 0 4px 16px #3a4edc44;
+        }
+
+        /* 各按钮的图片 */
+        .mode-switch-btn[data-mode="reveal"] { background-image: url('assets/挖雷.png'); }
+        .mode-switch-btn[data-mode="flag"]   { background-image: url('assets/插旗.png'); }
+        .hint-btn      { background-image: url('assets/提示.png'); }
+        .refresh-btn   { background-image: url('assets/刷新.png'); }
+
+        /* 移动端适配 */
+        @media (max-width: 700px) {
+          .footer-controls {
+            justify-content: space-around;
+            padding: 8px 0;
+          }
+          .footer-btn {
+            width: 48px;
+            height: 48px;
+            margin: 0 4px;
+          }
+          #settings-btn.icon-btn {
+            width: 38px;
+            height: 38px;
+          }
+        }
+
+        .btn-img {
+          width: 100%;
+          height: 100%;
+          display: block;
+          filter: drop-shadow(0 4px 16px #3a4edc44) drop-shadow(0 1.5px 4px #fff3);
+          pointer-events: none;
+        }
+        .footer-btn, #settings-btn.icon-btn {
+          background: transparent !important;
+          border: none !important;
+          outline: none !important;
+          width: 64px;
+          height: 64px;
+          padding: 0;
+          position: relative;
+        }
+        @media (max-width: 700px) {
+          .footer-btn, #settings-btn.icon-btn {
+            width: 48px;
+            height: 48px;
+          }
+        }
+
+        #settings-btn.icon-btn .btn-img {
+          width: 100%;
+          height: 100%;
+          display: block;
+          filter: drop-shadow(0 4px 16px #3a4edc44) drop-shadow(0 1.5px 4px #fff3);
+          pointer-events: none;
+        }
+
+        .footer-controls,
+        .footer-actions-left {
+          background: transparent !important;
+          box-shadow: none !important;
+          backdrop-filter: none !important;
+        }
     </style>
 </head>
 <body>
@@ -345,7 +491,9 @@
         <!-- Top Status Bar -->
         <div class="status-bar">
             <div class="status-left">
-                <button id="settings-btn" class="icon-btn settings-icon" title="设置" aria-label="打开设置菜单"></button>
+                <button id="settings-btn" class="icon-btn" title="设置" aria-label="打开设置菜单">
+                  <img src="assets/设置.png" alt="设置" class="btn-img">
+                </button>
                 <button id="help-btn" class="icon-btn help-icon" title="帮助" aria-label="打开帮助说明"></button>
                 <span id="timer-display">0s</span>
             </div>
@@ -368,9 +516,16 @@
         <!-- Footer Controls -->
         <div class="footer-controls">
              <div class="footer-actions-left">
-                 <button id="mode-switch-btn" class="footer-btn mode-switch-btn" data-mode="reveal" title="切换 挖开/插旗" aria-label="切换操作模式"></button>
-                 <button id="hint-btn" class="footer-btn hint-btn" title="提示 (未实现)" aria-label="获取提示"></button>
-                 <button id="refresh-btn" class="footer-btn refresh-btn" title="重新开始" aria-label="重新开始游戏"></button>
+                 <button id="mode-switch-btn" class="footer-btn mode-switch-btn" data-mode="reveal" title="切换 挖开/插旗" aria-label="切换操作模式">
+                   <img src="assets/挖雷.png" alt="挖雷" class="btn-img dig-img">
+                   <img src="assets/插旗.png" alt="插旗" class="btn-img flag-img" style="display:none;">
+                 </button>
+                 <button id="hint-btn" class="footer-btn hint-btn" title="提示 (未实现)" aria-label="获取提示">
+                   <img src="assets/提示.png" alt="提示" class="btn-img">
+                 </button>
+                 <button id="refresh-btn" class="footer-btn refresh-btn" title="重新开始" aria-label="重新开始游戏">
+                   <img src="assets/刷新.png" alt="刷新" class="btn-img">
+                 </button>
              </div>
              <button id="zoom-btn" class="action-button" title="缩放 (未实现)" aria-label="缩放视图"></button>
              <button id="reset-btn" style="display:none;" aria-hidden="true"></button>
@@ -1002,6 +1157,7 @@
         /** Sets interaction mode. */
         function setInteractionMode(mode) {
             currentInteractionMode = mode;
+            updateModeSwitchBtn(mode);
             if (modeSwitchBtn) {
                 modeSwitchBtn.dataset.mode = mode;
                 const nextMode = mode === 'reveal' ? '插旗' : '挖开';
@@ -1032,10 +1188,10 @@
                     renderHearts();
                     showLoseHeartAnim();
                     showLoseLifeTip();
-                    playSound(sound.explode);
-                    cellElement.classList.remove('hidden-style', 'flagged-style');
-                    cellElement.classList.add('exploded-style');
-                    cellElement.setAttribute('aria-label', `格子 ${r + 1} 行 ${c + 1} 列 (地雷爆炸)`);
+                playSound(sound.explode);
+                cellElement.classList.remove('hidden-style', 'flagged-style');
+                cellElement.classList.add('exploded-style');
+                cellElement.setAttribute('aria-label', `格子 ${r + 1} 行 ${c + 1} 列 (地雷爆炸)`);
                     doVibrate(400);
                     showExplosionFragments(cellElement); // 爆炸碎片动画
                     showExplosionSmoke(cellElement);
@@ -1154,7 +1310,7 @@
                     }
                 });
                 setTimeout(()=>{
-                    endGame(false);
+                endGame(false);
                 }, 600);
                 minesRemaining = Math.max(0, minesRemaining - 1);
                 minesLeftElement.textContent = `${minesRemaining}`;
@@ -1290,30 +1446,30 @@
         // --- Event Listener Setup ---
         /** Attaches event listeners to static elements. */
         function setupEventListeners() {
-            console.log("DEBUG: Setting up event listeners...");
+             console.log("DEBUG: Setting up event listeners...");
             try {
-                settingsBtn?.addEventListener('click', () => openModal('settings-modal'));
-                helpBtn?.addEventListener('click', () => openModal('help-modal'));
-                closeModalBtns.forEach(btn => { btn.addEventListener('click', () => closeModal(btn.dataset.modalId)); });
-                soundToggle?.addEventListener('change', (event) => { soundEnabled = event.target.checked; console.log("Sound enabled:", soundEnabled); playSound(sound.click); });
-                abandonBtn?.addEventListener('click', () => { if (!gameOver) { console.log("Challenge abandoned."); closeModal('settings-modal'); endGame(false); } });
+                 settingsBtn?.addEventListener('click', () => openModal('settings-modal'));
+                 helpBtn?.addEventListener('click', () => openModal('help-modal'));
+                 closeModalBtns.forEach(btn => { btn.addEventListener('click', () => closeModal(btn.dataset.modalId)); });
+                 soundToggle?.addEventListener('change', (event) => { soundEnabled = event.target.checked; console.log("Sound enabled:", soundEnabled); playSound(sound.click); });
+                 abandonBtn?.addEventListener('click', () => { if (!gameOver) { console.log("Challenge abandoned."); closeModal('settings-modal'); endGame(false); } });
                 modeSwitchBtn?.addEventListener('click', () => { autoHideStatusOnAction(); setInteractionMode(currentInteractionMode === 'reveal' ? 'flag' : 'reveal'); playSound(sound.click); });
                 refreshBtn?.addEventListener('click', () => { autoHideStatusOnAction(); playSound(sound.click); setLevel(currentLevel); });
                 hintBtn?.addEventListener('click', () => { playSound(sound.click); handleHintClick(); });
-                zoomBtn?.addEventListener('click', () => { playSound(sound.click); alert("缩放功能 (未实现)"); });
+                 zoomBtn?.addEventListener('click', () => { playSound(sound.click); alert("缩放功能 (未实现)"); });
                 playAgainBtn?.addEventListener('click', () => { autoHideStatusOnAction(); playSound(sound.click); setLevel(currentLevel); });
-                document.getElementById('copy-id-btn')?.addEventListener('click', () => { playSound(sound.click); alert("复制功能 (未实现)"); });
-                document.getElementById('feedback-btn')?.addEventListener('click', () => { playSound(sound.click); alert("问题反馈 (未实现)"); });
-                document.getElementById('contact-btn')?.addEventListener('click', () => { playSound(sound.click); alert("联系客服 (未实现)"); });
-                document.getElementById('terms-link')?.addEventListener('click', (e) => { e.preventDefault(); playSound(sound.click); alert("用户协议 (未实现)"); });
-                document.getElementById('privacy-link')?.addEventListener('click', (e) => { e.preventDefault(); playSound(sound.click); alert("隐私政策 (未实现)"); });
-                document.getElementById('child-privacy-link')?.addEventListener('click', (e) => { e.preventDefault(); playSound(sound.click); alert("儿童隐私 (未实现)"); });
-                boardContainer?.addEventListener('contextmenu', e => e.preventDefault());
-                console.log("DEBUG: Event listeners setup complete.");
-            } catch (listenerError) {
-                console.error("DEBUG: Error setting up event listeners!", listenerError);
-                window.onerror("Error setting up listeners", "setupEventListeners", 0, 0, listenerError);
-            }
+                 document.getElementById('copy-id-btn')?.addEventListener('click', () => { playSound(sound.click); alert("复制功能 (未实现)"); });
+                 document.getElementById('feedback-btn')?.addEventListener('click', () => { playSound(sound.click); alert("问题反馈 (未实现)"); });
+                 document.getElementById('contact-btn')?.addEventListener('click', () => { playSound(sound.click); alert("联系客服 (未实现)"); });
+                 document.getElementById('terms-link')?.addEventListener('click', (e) => { e.preventDefault(); playSound(sound.click); alert("用户协议 (未实现)"); });
+                 document.getElementById('privacy-link')?.addEventListener('click', (e) => { e.preventDefault(); playSound(sound.click); alert("隐私政策 (未实现)"); });
+                 document.getElementById('child-privacy-link')?.addEventListener('click', (e) => { e.preventDefault(); playSound(sound.click); alert("儿童隐私 (未实现)"); });
+                 boardContainer?.addEventListener('contextmenu', e => e.preventDefault());
+                 console.log("DEBUG: Event listeners setup complete.");
+             } catch (listenerError) {
+                  console.error("DEBUG: Error setting up event listeners!", listenerError);
+                  window.onerror("Error setting up listeners", "setupEventListeners", 0, 0, listenerError);
+             }
         }
 
         // --- Game Initialization Trigger ---
@@ -1808,6 +1964,25 @@
         function isMobile() {
             return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
         }
+
+        // 切换“挖雷/插旗”按钮图片显示
+        function updateModeSwitchBtn(mode) {
+          const digImg = modeSwitchBtn.querySelector('.dig-img');
+          const flagImg = modeSwitchBtn.querySelector('.flag-img');
+          if (mode === 'reveal') {
+            digImg.style.display = '';
+            flagImg.style.display = 'none';
+          } else {
+            digImg.style.display = 'none';
+            flagImg.style.display = '';
+          }
+        }
+        // 初始化和切换逻辑
+        // updateModeSwitchBtn(currentInteractionMode);
+        // modeSwitchBtn.addEventListener('click', () => {
+        //   currentInteractionMode = currentInteractionMode === 'reveal' ? 'flag' : 'reveal';
+        //   updateModeSwitchBtn(currentInteractionMode);
+        // });
     </script>
 </body>
 </html>
